@@ -1,0 +1,230 @@
+[
+  {
+    "id": "55840431-418D-4980-BAA9-255864F3B796",
+    "title": "Basics 1",
+    "subtitle": "Greetings, Introductions, and Essentials",
+    "lessons": [
+      {
+        "id": "944B367C-7915-485A-9643-4190D6941F18",
+        "title": "Say Hello",
+        "icon": "hand.wave.fill",
+        "type": "translation",
+        "requiredXP": 0,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "1F58245D-9A97-485E-9F0A-98B204B0E283",
+            "type": "translation",
+            "promptTitle": "Translate this sentence",
+            "pinyin": "nǐ hǎo",
+            "characters": "你好",
+            "correctAnswer": ["Hello"],
+            "availableWords": ["Hello", "Goodbye", "Morning", "You"]
+          },
+          {
+            "id": "D40A8224-6C1D-4021-A53B-6D931645E063",
+            "type": "translation",
+            "promptTitle": "Translate this sentence",
+            "pinyin": "Nǐ hǎo ma?",
+            "characters": "你好吗？",
+            "correctAnswer": ["How", "are", "you", "?"],
+            "availableWords": ["How", "are", "you", "?", "Good", "I", "am"]
+          }
+        ]
+      },
+      {
+        "id": "6356E688-82A8-43C4-800B-09492574D412",
+        "title": "Match Basic Words",
+        "icon": "rectangle.grid.2x2.fill",
+        "type": "matching",
+        "requiredXP": 10,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "2C3D4E5F-6A7B-8C9D-0E1F-2A3B4C5D6E7F",
+            "type": "matching",
+            "leftItems": ["Good morning", "You (formal)", "Good evening", "Hello"],
+            "rightItems": ["早上好", "您", "晚上好", "你好"],
+            "rightItemsPinyin": ["zǎoshang hǎo", "nín", "wǎnshang hǎo", "nǐ hǎo"]
+          }
+        ]
+      },
+      {
+        "id": "E1A8F5B7-3C4D-5E6F-7A8B-9C0D1E2F3A4B",
+        "title": "Translate 'Thank you'",
+        "icon": "hand.thumbsup.fill",
+        "type": "translation",
+        "requiredXP": 20,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "87654321-ABCD-EF01-2345-67890ABCDEF0",
+            "type": "translation",
+            "promptTitle": "Translate this sentence",
+            "pinyin": "xièxie",
+            "characters": "谢谢",
+            "correctAnswer": ["Thank", "you"],
+            "availableWords": ["Thank", "you", "Morning", "Please"]
+          }
+        ]
+      },
+      {
+        "id": "B7F5D4C6-1E2A-483B-90AC-BE1C4F9D2805",
+        "title": "Basic Introductions",
+        "icon": "person.2.fill",
+        "type": "translation",
+        "requiredXP": 30,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "5A8D2164-B7C9-403F-8E26-7D0F9B35C218",
+            "type": "translation",
+            "promptTitle": "Translate: 'My name is...'",
+            "pinyin": "Wǒ jiào...",
+            "characters": "我叫...",
+            "correctAnswer": ["My", "name", "is"],
+            "availableWords": ["My", "name", "is", "You", "Call", "He"]
+          },
+          {
+             "id": "E3B0C442-9A0C-4D9F-B15F-434417465746",
+             "type":"matching",
+             "leftItems":["I", "you", "he/she/it", "to be called"],
+             "rightItems": ["我", "你", "他/她/它", "叫"],
+             "rightItemsPinyin": ["wǒ", "nǐ", "tā", "jiào"]
+          }
+        ]
+      },
+      {
+        "id": "F0123456-789A-BCDE-F012-3456789ABCDE",
+        "title": "Numbers 1-5",
+        "icon": "number.circle.fill",
+        "type": "matching",
+        "requiredXP": 40,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "22334455-6677-8899-AABB-CCDDEEFF0011",
+            "type": "matching",
+            "leftItems": ["One", "Two", "Three", "Four", "Five"],
+            "rightItems": ["一", "二", "三", "四", "五"],
+            "rightItemsPinyin": ["yī", "èr", "sān", "sì", "wǔ"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "11223344-5566-7788-99AA-BBCCDDEEFF00",
+    "title": "Basics 2",
+    "subtitle": "Common Phrases and Questions",
+    "lessons": [
+      {
+        "id": "AABBCCDD-EEFF-0011-2233-445566778899",
+        "title": "Saying Goodbye",
+        "icon": "hand.wave",
+        "type": "translation",
+        "requiredXP": 0,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "FF001122-3344-5566-7788-99AABBCCDDEE",
+            "type": "translation",
+            "promptTitle": "Translate: 'Goodbye'",
+            "pinyin": "zàijiàn",
+            "characters": "再见",
+            "correctAnswer": ["Goodbye"],
+            "availableWords": ["Goodbye", "Again", "See", "Hello"]
+          }
+        ]
+      },
+      {
+        "id": "98765432-10AB-CDEF-0123-456789ABCDEF",
+        "title": "Asking 'How are you?'",
+        "icon": "questionmark.circle.fill",
+        "type": "translation",
+        "requiredXP": 10,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "01234567-89AB-CDEF-0123-456789ABCDEF",
+            "type": "translation",
+            "promptTitle": "Translate: 'How are you?'",
+            "pinyin": "Nǐ hǎo ma?",
+            "characters": "你好吗？",
+            "correctAnswer": ["How", "are", "you", "?"],
+            "availableWords": ["How", "are", "you", "?", "Good", "I", "am"]
+          }
+        ]
+      },
+      {
+          "id": "FEDCBA98-7654-3210-FEDC-BA9876543210",
+          "title": "Responding to 'How are you?'",
+          "icon": "checkmark.circle.fill",
+          "type":"translation",
+          "requiredXP": 20,
+          "isLocked": false,
+          "exercises" : [
+            {
+               "id": "10293847-56AF-BE1C-2D3E-4F5A6B7C8D9E",
+                "type" : "translation",
+              "promptTitle": "Translate: 'I'm fine, thank you.'",
+              "pinyin": "Wǒ hěn hǎo, xièxie.",
+              "characters": "我很好，谢谢。",
+              "correctAnswer": ["I'm", "very", "good", ",", "thank", "you", "."],
+              "availableWords": ["I'm", "very", "good", ",", "thank", "you", ".", "you", "bad", "not"]
+            },
+            {
+                "id": "F1E2D3C4-B5A6-9870-FEDC-BA9876543210",
+                 "type":"matching",
+                "leftItems": ["I", "very", "good/well", "thank you"],
+                "rightItems":["我", "很", "好", "谢谢"],
+                "rightItemsPinyin":["wǒ", "hěn", "hǎo", "xièxie"]
+            }
+          ]
+      },
+       {
+            "id": "0FEDCBA9-8765-4321-0FED-CBA987654321",
+            "title": "Numbers 6-10",
+            "icon": "number.circle",
+            "type": "matching",
+            "requiredXP": 30,
+            "isLocked": false,
+            "exercises": [
+               {
+                "id": "24680ACE-1357-BDF0-2468-0ACE1357BDF0",
+                 "type":"matching",
+                "leftItems": ["Six", "Seven", "Eight", "Nine", "Ten"],
+                "rightItems": ["六", "七", "八", "九", "十"],
+                "rightItemsPinyin": ["liù", "qī", "bā", "jiǔ", "shí"]
+                }
+            ]
+        },
+        {
+           "id": "15937BDF-0246-8ACE-1357-BDF024680ACE",
+            "title": "This and That",
+            "icon":"arrow.left.arrow.right",
+            "type":"translation",
+            "requiredXP": 40,
+            "isLocked": false,
+            "exercises": [
+              {
+                 "id": "BDF02468-0ACE-1357-BDF0-24680ACE1357",
+                  "type":"translation",
+                 "promptTitle":"Translate 'This is...'",
+                 "pinyin":"Zhè shì...",
+                 "characters":"这是...",
+                 "correctAnswer":["This", "is"],
+                 "availableWords":["This", "is", "That", "was"]
+              },
+              {
+                  "id": "48C0A29E-B1DF-4637-850F-123456789ABC",
+                   "type":"matching",
+                 "leftItems": ["This", "That"],
+                 "rightItems": ["这", "那"],
+                 "rightItemsPinyin":["zhè", "nà"]
+              }
+            ]
+        }
+    ]
+  }
+]
