@@ -71,6 +71,9 @@ struct CourseSectionView: View {
             case .matching:
                 DuolingoMatchingView(lesson: lesson)
                     .environmentObject(appState)
+            case .imageSelection:
+                DuolingoImageSelectionView(lesson: lesson)
+                    .environmentObject(appState)
             }
         } else {
             Text("No exercises available") // Placeholder for lessons without exercises.
