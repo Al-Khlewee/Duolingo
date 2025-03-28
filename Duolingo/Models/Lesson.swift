@@ -29,6 +29,6 @@ struct Lesson: Identifiable, Codable, Hashable {
     enum LessonType: String, Codable, CaseIterable {
         case translation
         case matching
-        //  add other lesson types
+        case imageSelection  // Added this case to handle image selection lessons
     }
 }

@@ -110,6 +110,92 @@
             "rightItemsPinyin": ["yī", "èr", "sān", "sì", "wǔ"]
           }
         ]
+      },
+      {
+        "id": "A0B1C2D3-E4F5-A6B7-C8D9-E0F1A2B3C4D5",
+        "title": "Identify Animals",
+        "icon": "pawprint.fill",
+        "type": "imageSelection",
+        "requiredXP": 50,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "D5C4B3A2-1098-7654-3210-D5C4B3A21098",
+            "type": "imageSelection",
+            "promptTitle": "Select the image that means 'dog'",
+            "pinyin": "gǒu",
+            "characters": "狗",
+            "correctAnswer": null,
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": [
+              {
+                "id": "E5D4C3B2-A198-7654-3210-E5D4C3B2A198",
+                "systemImageName": "dog.fill",
+                "isCorrect": true,
+                "englishText": "Dog"
+              },
+              {
+                "id": "F5E4D3C2-B1A9-8765-4321-F5E4D3C2B1A9",
+                "systemImageName": "cat.fill",
+                "isCorrect": false,
+                "englishText": "Cat"
+              },
+              {
+                "id": "A5B4C3D2-E1F9-8765-4321-A5B4C3D2E1F9",
+                "systemImageName": "bird.fill",
+                "isCorrect": false,
+                "englishText": "Bird"
+              },
+              {
+                "id": "B5A4D3C2-F1E9-8765-4321-B5A4D3C2F1E9",
+                "systemImageName": "hare.fill",
+                "isCorrect": false,
+                "englishText": "Rabbit"
+              }
+            ]
+          },
+          {
+            "id": "C5B4A3D2-E1F9-7654-3210-C5B4A3D2E1F9",
+            "type": "imageSelection",
+            "promptTitle": "Select the image that means 'cat'",
+            "pinyin": "māo",
+            "characters": "猫",
+            "correctAnswer": null,
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": [
+              {
+                "id": "D5C4B3A2-F1E9-7654-3210-D5C4B3A2F1E9",
+                "systemImageName": "dog.fill",
+                "isCorrect": false,
+                "englishText": "Dog"
+              },
+              {
+                "id": "E5D4C3B2-F1E9-7654-3210-E5D4C3B2F1E9",
+                "systemImageName": "cat.fill",
+                "isCorrect": true,
+                "englishText": "Cat"
+              },
+              {
+                "id": "F5E4D3C2-F1E9-7654-3210-F5E4D3C2F1E9",
+                "systemImageName": "bird.fill",
+                "isCorrect": false,
+                "englishText": "Bird"
+              },
+              {
+                "id": "A5B4C3D2-F1E9-7654-3210-A5B4C3D2F1E9",
+                "systemImageName": "hare.fill",
+                "isCorrect": false,
+                "englishText": "Rabbit"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -224,7 +310,55 @@
                  "rightItemsPinyin":["zhè", "nà"]
               }
             ]
-        }
+        },
+        {
+        "id": "C3B4A5D6-E7F8-9A0B-C1D2-E3F4A5B6C7D8",
+        "title": "Identify Fruits",
+        "icon": "leaf.fill",
+        "type": "imageSelection",
+        "requiredXP": 50,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "D4C5B6A7-8E9F-A0B1-C2D3-E4F5A6B7C8D9",
+            "type": "imageSelection",
+            "promptTitle": "Select the image that means 'apple'",
+            "pinyin": "píngguǒ",
+            "characters": "苹果",
+            "correctAnswer": null,
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": [
+              {
+                "id": "E5D6C7B8-9F0A-B1C2-D3E4-F5A6B7C8D9E0",
+                "systemImageName": "apple.logo",
+                "isCorrect": true,
+                "englishText": "Apple"
+              },
+              {
+                "id": "F6E7D8C9-0A1B-C2D3-E4F5-A6B7C8D9E0F1",
+                "systemImageName": "leaf.fill",
+                "isCorrect": false,
+                "englishText": "Banana"
+              },
+              {
+                "id": "A7B8C9D0-1B2C-D3E4-F5A6-B7C8D9E0F1A2",
+                "systemImageName": "circle.fill",
+                "isCorrect": false,
+                "englishText": "Orange"
+              },
+              {
+                "id": "B8C9D0E1-2C3D-E4F5-A6B7-C8D9E0F1A2B3",
+                "systemImageName": "circle.grid.2x2.fill",
+                "isCorrect": false,
+                "englishText": "Grapes"
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 ]
