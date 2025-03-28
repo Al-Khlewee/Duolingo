@@ -26,8 +26,9 @@ struct ExerciseHeaderView: View {
                     .font(.system(size: 24))
                     .foregroundColor(theme.textSecondary)
                 
-                // Progress Bar
+                // Use the shared DuolingoProgressBar
                 DuolingoProgressBar(progress: progressValue)
+                    .frame(height: 20)
                 
                 HStack(spacing: 5) {
                     Image(systemName: "heart.fill")
@@ -39,32 +40,17 @@ struct ExerciseHeaderView: View {
             }
             .padding(.horizontal, 20)
         }
-    }
-}
-
-struct ExerciseBackButton: View {
-    let action: () -> Void
-    @Environment(\.theme) var theme
-    
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: "arrow.left")
-                Text("Back")
-            }
-            .foregroundColor(theme.accent)
-        }
+        .padding(.vertical, 10)
     }
 }
 
 #Preview {
     VStack {
-        ExerciseHeaderView(streakCount: 3, progressValue: 0.6, heartsCount: 4)
-        
-        Spacer()
-        
-        ExerciseBackButton(action: {})
+        ExerciseHeaderView(streakCount: 3, progressValue: 0.5, heartsCount: 5)
+        ExerciseHeaderView(streakCount: 0, progressValue: 0.25, heartsCount: 3)
+        ExerciseHeaderView(streakCount: 10, progressValue: 0.75, heartsCount: 4)
     }
     .padding()
+    .background(Color(.systemBackground))
     .environment(\.theme, .light)
 }

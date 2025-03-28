@@ -8,49 +8,42 @@
 import SwiftUI
 
 struct AnswerFeedbackView: View {
-    let isAnswered: Bool
     let isCorrect: Bool
-    let onContinue: () -> Void
+    let message: String?
     
     @Environment(\.theme) var theme
     
+    // Initialize with optional message parameter
+    init(isCorrect: Bool, message: String? = nil) {
+        self.isCorrect = isCorrect
+        self.message = message
+    }
+    
     var body: some View {
-        VStack(spacing: 16) {
-            HStack {
-                if isCorrect {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(theme.success)
-                        Text("Awesome!")
-                            .foregroundColor(theme.success)
-                            .fontWeight(.bold)
-                    }
-                } else {
-                    HStack {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(theme.failure)
-                        Text("Not quite right")
-                            .foregroundColor(theme.failure)
-                            .fontWeight(.bold)
-                    }
-                }
-
-                Spacer()
-
-                HStack(spacing: 15) {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(isCorrect ? theme.success : theme.textSecondary)
-                    Image(systemName: "camera")
-                        .foregroundColor(isCorrect ? theme.success : theme.textSecondary)
-                }
+        HStack {
+            if isCorrect {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(theme.success)
+                Text(message ?? "Awesome!")
+                    .foregroundColor(theme.success)
+                    .fontWeight(.bold)
+            } else {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(theme.failure)
+                Text(message ?? "Not quite right")
+                    .foregroundColor(theme.failure)
+                    .fontWeight(.bold)
             }
-
-            // Continue Button
-            DuolingoButton(
-                text: "CONTINUE",
-                buttonType: isCorrect ? .success : .failure,
-                action: onContinue
-            )
+            
+            Spacer()
+            
+            // Optional social sharing buttons (customizable)
+            HStack(spacing: 15) {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(isCorrect ? theme.success : theme.textSecondary)
+                Image(systemName: "camera")
+                    .foregroundColor(isCorrect ? theme.success : theme.textSecondary)
+            }
         }
     }
 }
@@ -69,37 +62,16 @@ struct CheckAnswerButton: View {
     }
 }
 
-// Unified answer control that shows either the feedback or check button
-struct AnswerControlView: View {
-    let isAnswered: Bool
-    let isCorrect: Bool
-    let hasSelectedAnswer: Bool
-    let onCheck: () -> Void
-    let onContinue: () -> Void
-    
-    var body: some View {
-        if isAnswered {
-            AnswerFeedbackView(
-                isAnswered: isAnswered,
-                isCorrect: isCorrect,
-                onContinue: onContinue
-            )
-        } else {
-            CheckAnswerButton(
-                hasAnswer: hasSelectedAnswer,
-                onCheck: onCheck
-            )
-        }
-    }
-}
-
 #Preview {
-    VStack(spacing: 30) {
-        AnswerFeedbackView(isAnswered: true, isCorrect: true, onContinue: {})
-        AnswerFeedbackView(isAnswered: true, isCorrect: false, onContinue: {})
+    VStack(spacing: 20) {
+        AnswerFeedbackView(isCorrect: true)
+        AnswerFeedbackView(isCorrect: false)
+        AnswerFeedbackView(isCorrect: true, message: "Perfect!")
+        AnswerFeedbackView(isCorrect: false, message: "Try again")
         CheckAnswerButton(hasAnswer: true, onCheck: {})
         CheckAnswerButton(hasAnswer: false, onCheck: {})
     }
     .padding()
     .environment(\.theme, .light)
+    .previewLayout(.sizeThatFits)
 }

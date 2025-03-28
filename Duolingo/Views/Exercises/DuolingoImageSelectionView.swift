@@ -16,38 +16,12 @@ struct DuolingoImageSelectionView: View {
             
             if let exercise = viewModel.currentExercise {
                 VStack(spacing: 0) {
-                    // Header section
-                    VStack(spacing: 5) {
-                        Text("\(viewModel.streakCount) IN A ROW")
-                            .foregroundColor(theme.accent)
-                            .font(.caption)
-                            .fontWeight(.bold)
-                        
-                        HStack {
-                            Image(systemName: "gearshape")
-                                .font(.system(size: 24))
-                                .foregroundColor(theme.textSecondary)
-                            
-                            ZStack(alignment: .leading) {
-                                Capsule()
-                                    .frame(height: 20)
-                                    .foregroundColor(theme.progressBackground)
-                                
-                                Capsule()
-                                    .frame(width: UIScreen.main.bounds.width * 0.5 * viewModel.progressValue, height: 20)
-                                    .foregroundColor(theme.progress)
-                            }
-                            
-                            HStack(spacing: 5) {
-                                Image(systemName: "heart.fill")
-                                    .foregroundColor(theme.failure)
-                                    .font(.system(size: 24))
-                                Text("\(viewModel.heartsCount)")
-                                    .foregroundColor(theme.textPrimary)
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                    }
+                    // Use shared ExerciseHeaderView component
+                    ExerciseHeaderView(
+                        streakCount: viewModel.streakCount,
+                        progressValue: viewModel.progressValue,
+                        heartsCount: viewModel.heartsCount
+                    )
                     
                     // Exercise content
                     VStack(spacing: 20) {
@@ -58,29 +32,12 @@ struct DuolingoImageSelectionView: View {
                             .padding(.top, 20)
                         
                         HStack(spacing: 15) {
-                            Button {
-                                // Action to play sound
-                                print("Play sound")
-                            } label: {
-                                ZStack {
-                                    // Bottom layer (shadow)
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(theme.accent.opacity(0.7))
-                                        .frame(width: 50, height: 50)
-                                    
-                                    // Top layer (main button)
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(theme.accent)
-                                            .frame(width: 50, height: 50)
-                                        Image(systemName: "speaker.wave.2.fill")
-                                            .foregroundColor(theme.textPrimary)
-                                            .font(.system(size: 20))
-                                    }
-                                    .offset(y: -4)
-                                }
-                            }
-
+                            // Use shared SpeakerButton component
+                            SpeakerButton(
+                                isPlaying: viewModel.isPlaying,
+                                action: { viewModel.playAudio() }
+                            )
+                            
                             VStack(alignment: .leading, spacing: 2) {
                                 if let pinyin = exercise.pinyin {
                                     Text(pinyin)
@@ -123,50 +80,20 @@ struct DuolingoImageSelectionView: View {
                         
                         Spacer()
                         
-                        // Check/Continue button
+                        // Use the shared components for feedback and buttons
                         VStack(spacing: 16) {
                             if viewModel.isAnswered {
-                                HStack {
-                                    if viewModel.isCorrect {
-                                        HStack {
-                                            Image(systemName: "checkmark.circle.fill")
-                                                .foregroundColor(theme.success)
-                                            Text("Awesome!")
-                                                .foregroundColor(theme.success)
-                                                .fontWeight(.bold)
-                                        }
-                                    } else {
-                                        HStack {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .foregroundColor(theme.failure)
-                                            Text("Not quite right")
-                                                .foregroundColor(theme.failure)
-                                                .fontWeight(.bold)
-                                        }
-                                    }
-
-                                    Spacer()
-
-                                    HStack(spacing: 15) {
-                                        Image(systemName: "square.and.arrow.up")
-                                            .foregroundColor(viewModel.isCorrect ? theme.success : theme.textSecondary)
-                                        Image(systemName: "camera")
-                                            .foregroundColor(viewModel.isCorrect ? theme.success : theme.textSecondary)
-                                    }
-                                }
+                                // Use shared AnswerFeedbackView
+                                AnswerFeedbackView(isCorrect: viewModel.isCorrect)
                             }
-
-                            // Button with consistent 3D effect
-                            ZStack {
-                                // Shadow layer
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(viewModel.isAnswered ? 
-                                         (viewModel.isCorrect ? theme.success.opacity(0.7) : theme.failure.opacity(0.7)) :
-                                         (viewModel.selectedImageId == nil ? theme.buttonDisabled.opacity(0.7) : theme.accent.opacity(0.7)))
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 50)
-                                
-                                Button(action: {
+                            
+                            // Use shared DuolingoButton component with 3D effect
+                            DuolingoButton(
+                                text: viewModel.isAnswered ? "CONTINUE" : "CHECK",
+                                buttonType: viewModel.isAnswered ? 
+                                    (viewModel.isCorrect ? .success : .failure) : .primary,
+                                isEnabled: viewModel.selectedImageId != nil || viewModel.isAnswered,
+                                action: {
                                     if viewModel.isAnswered {
                                         if viewModel.isCorrect {
                                             appState.completeCurrentExercise()
@@ -178,24 +105,8 @@ struct DuolingoImageSelectionView: View {
                                     } else {
                                         viewModel.checkAnswer()
                                     }
-                                }) {
-                                    Text(viewModel.isAnswered ? "CONTINUE" : "CHECK")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(viewModel.selectedImageId == nil && !viewModel.isAnswered ? 
-                                                       theme.textSecondary : theme.textPrimary)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 50)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 12)
-                                                .fill(viewModel.isAnswered ? 
-                                                     (viewModel.isCorrect ? theme.success : theme.failure) :
-                                                     (viewModel.selectedImageId == nil ? theme.buttonDisabled : theme.accent))
-                                        )
                                 }
-                                .disabled(viewModel.selectedImageId == nil && !viewModel.isAnswered)
-                                .offset(y: -4)
-                            }
-                            .frame(height: 50)
+                            )
                         }
                         .padding(.horizontal)
                         .padding(.bottom, 20)
@@ -206,15 +117,10 @@ struct DuolingoImageSelectionView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
+                // Use shared ExerciseBackButton
+                ExerciseBackButton(action: {
                     appState.currentLesson = nil
-                }) {
-                    HStack {
-                        Image(systemName: "arrow.left")
-                        Text("Back")
-                    }
-                    .foregroundColor(theme.accent)
-                }
+                })
             }
         }
         .onAppear {

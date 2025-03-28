@@ -10,6 +10,7 @@ class ImageSelectionViewModel: ObservableObject {
     @Published var streakCount: Int = 0
     @Published var heartsCount: Int = 5
     @Published var progressValue: CGFloat = 0.0
+    @Published var isPlaying: Bool = false // Added for SpeakerButton compatibility
     @Published var lesson: Lesson
 
     init(lesson: Lesson, exerciseIndex: Int) {
@@ -55,5 +56,14 @@ class ImageSelectionViewModel: ObservableObject {
         isAnswered = false
         isCorrect = false
         selectedImageId = nil
+    }
+    
+    // Added for SpeakerButton compatibility
+    func playAudio() {
+        isPlaying = true
+        // Simulate audio playback - in a real app, you'd implement actual audio playback
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.isPlaying = false
+        }
     }
 }
