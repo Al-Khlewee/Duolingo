@@ -21,12 +21,14 @@ struct Exercise: Codable, Identifiable {
     let rightItems: [String]?
     let rightItemsPinyin: [String]?
     let imageOptions: [ImageOption]? // New property for image selection exercise
+    let audioURL: String? // URL string for audio file 
 
     //  RawRepresentable for JSON (de)serialization and easy debugging.
     enum ExerciseType: String, Codable, CaseIterable {
         case translation
         case matching
-        case imageSelection // New exercise type
+        case imageSelection 
+        case listening // New exercise type for listening exercises
     }
 }
 

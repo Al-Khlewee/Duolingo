@@ -26,41 +26,54 @@ struct AppTheme {
     let iconDisabledColor: Color // icons in LessonCircle
     let lessonConnector: Color
 
-    // Example of a "dark mode" theme.
+    // Duolingo-branded color constants
+    private static let duoGreen = Color(red: 88/255, green: 204/255, blue: 2/255)        // #58CC02
+    private static let duoBlue = Color(red: 28/255, green: 176/255, blue: 246/255)       // #1CB0F6
+    private static let duoRed = Color(red: 255/255, green: 75/255, blue: 75/255)         // #FF4B4B
+    private static let duoOrange = Color(red: 255/255, green: 150/255, blue: 0/255)      // #FF9600
+    private static let duoYellow = Color(red: 255/255, green: 200/255, blue: 0/255)      // #FFC800
+    private static let duoPurple = Color(red: 175/255, green: 82/255, blue: 222/255)     // #AF52DE
+    private static let duoGray = Color(red: 118/255, green: 118/255, blue: 118/255)      // #767676
+    private static let duoLightGray = Color(red: 229/255, green: 229/255, blue: 229/255) // #E5E5E5
+    private static let duoDarkGray = Color(red: 77/255, green: 77/255, blue: 77/255)     // #4D4D4D
+    private static let duoDarkest = Color(red: 41/255, green: 41/255, blue: 41/255)      // #292929
+
+    // Dark theme (based on actual Duolingo dark mode)
     static let dark = AppTheme(
         textPrimary: .white,
         textSecondary: Color(white: 0.7),
-        accent: Color(red: 0.58, green: 0.87, blue: 0.35),  // Duolingo green
-        background: Color(red: 0.11, green: 0.11, blue: 0.12),
-        cardBackground: Color(red: 0.17, green: 0.17, blue: 0.18),
-        button: Color(red: 0.22, green: 0.22, blue: 0.23),
-        buttonDisabled: Color(red: 0.22, green: 0.22, blue: 0.23).opacity(0.5),
-        progress: Color(red: 0.58, green: 0.87, blue: 0.35),
-        progressBackground: Color(red: 0.3, green: 0.3, blue: 0.3),
-        success: Color(red: 0.58, green: 0.87, blue: 0.35),
-        failure: Color(red: 0.92, green: 0.25, blue: 0.25),
-        highlight: Color(red: 1.0, green: 0.83, blue: 0.0),
+        accent: duoGreen,
+        background: duoDarkest,
+        cardBackground: duoDarkGray,
+        button: duoGreen,
+        buttonDisabled: duoGray,
+        progress: duoGreen,
+        progressBackground: duoLightGray.opacity(0.2),
+        success: duoGreen,
+        failure: duoRed,
+        highlight: duoBlue,
         iconColor: .white,
-        iconDisabledColor: Color(white: 0.6),
-        lessonConnector: Color(red: 0.58, green: 0.87, blue: 0.35)
+        iconDisabledColor: duoGray,
+        lessonConnector: duoGreen
     )
 
+    // Light theme (based on actual Duolingo light mode)
     static let light = AppTheme(
-        textPrimary: Color(red: 0.13, green: 0.13, blue: 0.13),
-        textSecondary: Color(red: 0.45, green: 0.45, blue: 0.45),
-        accent: Color(red: 0.28, green: 0.85, blue: 0.35),
-        background: Color(red: 0.98, green: 0.98, blue: 0.98),
+        textPrimary: duoDarkest,
+        textSecondary: duoDarkGray,
+        accent: duoGreen,
+        background: .white,
         cardBackground: .white,
-        button: Color(red: 0.95, green: 0.95, blue: 0.95),
-        buttonDisabled: Color(red: 0.9, green: 0.9, blue: 0.9),
-        progress: Color(red: 0.28, green: 0.85, blue: 0.35),
-        progressBackground: Color(red: 0.9, green: 0.9, blue: 0.9),
-        success: Color(red: 0.28, green: 0.85, blue: 0.35),
-        failure: Color(red: 0.95, green: 0.23, blue: 0.23),
-        highlight: Color(red: 1.0, green: 0.83, blue: 0.0),
-        iconColor: Color(red: 0.13, green: 0.13, blue: 0.13),
-        iconDisabledColor: Color(red: 0.75, green: 0.75, blue: 0.75),
-        lessonConnector: Color(red: 0.28, green: 0.85, blue: 0.35)
+        button: duoLightGray,
+        buttonDisabled: duoLightGray.opacity(0.5),
+        progress: duoGreen,
+        progressBackground: duoLightGray,
+        success: duoGreen,
+        failure: duoRed,
+        highlight: duoYellow,
+        iconColor: duoDarkest,
+        iconDisabledColor: duoGray,
+        lessonConnector: duoGreen
     )
 }
 
@@ -73,5 +86,5 @@ extension EnvironmentValues {
 }
 
 private struct ThemeKey: EnvironmentKey {
-    static let defaultValue: AppTheme = AppTheme.dark // Default to dark theme.
+    static let defaultValue: AppTheme = AppTheme.light // Set light theme as default to match Duolingo's default
 }

@@ -38,7 +38,20 @@ struct DuolingoButton: View {
         }
         
         func shadowColor(theme: AppTheme, isEnabled: Bool) -> Color {
-            return backgroundColor(theme: theme, isEnabled: isEnabled).opacity(0.7)
+            if !isEnabled {
+                return theme.buttonDisabled.opacity(0.5)
+            }
+            
+            switch self {
+            case .primary:
+                // Darker green shadow for primary buttons
+                return Color(red: 88/255 * 0.7, green: 204/255 * 0.7, blue: 2/255 * 0.7)
+            case .success:
+                return Color(red: 88/255 * 0.7, green: 204/255 * 0.7, blue: 2/255 * 0.7)
+            case .failure:
+                // Darker red shadow for failure buttons
+                return Color(red: 220/255, green: 38/255, blue: 38/255)
+            }
         }
     }
     
@@ -58,7 +71,7 @@ struct DuolingoButton: View {
     var body: some View {
         ZStack {
             // Shadow layer
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 8)
                 .fill(buttonType.shadowColor(theme: theme, isEnabled: isEnabled))
                 .frame(maxWidth: .infinity)
                 .frame(height: 50)
@@ -66,12 +79,12 @@ struct DuolingoButton: View {
             // Button layer
             Button(action: action) {
                 Text(text)
-                    .fontWeight(.bold)
-                    .foregroundColor(isEnabled ? theme.textPrimary : theme.textPrimary.opacity(0.6))
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
                     .background(
-                        RoundedRectangle(cornerRadius: 12)
+                        RoundedRectangle(cornerRadius: 8)
                             .fill(buttonType.backgroundColor(theme: theme, isEnabled: isEnabled))
                     )
             }

@@ -196,6 +196,44 @@
             ]
           }
         ]
+      },
+      {
+        "id": "ABCDEF12-3456-7890-ABCD-EF1234567890",
+        "title": "Listen and Write",
+        "icon": "ear.fill",
+        "type": "listening",
+        "requiredXP": 60,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "ABCDEF12-3456-7890-ABCD-EF1234567891",
+            "type": "listening",
+            "promptTitle": "Write what you hear",
+            "pinyin": "nǐ hǎo",
+            "characters": "你好",
+            "correctAnswer": ["Hello", "Hi"],
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": null,
+            "audioURL": "mock"
+          },
+          {
+            "id": "ABCDEF12-3456-7890-ABCD-EF1234567892",
+            "type": "listening",
+            "promptTitle": "Type the English translation",
+            "pinyin": "xièxie",
+            "characters": "谢谢",
+            "correctAnswer": ["Thank you", "Thanks"],
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": null,
+            "audioURL": "mock"
+          }
+        ]
       }
     ]
   },
@@ -356,6 +394,44 @@
                 "englishText": "Grapes"
               }
             ]
+          }
+        ]
+      },
+      {
+        "id": "ABCDEF12-3456-7890-ABCD-EF1234567893",
+        "title": "Advanced Listening",
+        "icon": "waveform.badge.mic",
+        "type": "listening",
+        "requiredXP": 60,
+        "isLocked": false,
+        "exercises": [
+          {
+            "id": "ABCDEF12-3456-7890-ABCD-EF1234567894",
+            "type": "listening",
+            "promptTitle": "Write what you hear",
+            "pinyin": "Wǒ hěn hǎo, xièxie",
+            "characters": "我很好，谢谢",
+            "correctAnswer": ["I am fine, thank you"],
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": null,
+            "audioURL": "mock"
+          },
+          {
+            "id": "ABCDEF12-3456-7890-ABCD-EF1234567895",
+            "type": "listening",
+            "promptTitle": "Type what you hear",
+            "pinyin": "Zàijiàn",
+            "characters": "再见",
+            "correctAnswer": ["Goodbye", "Bye"],
+            "availableWords": null,
+            "leftItems": null,
+            "rightItems": null,
+            "rightItemsPinyin": null,
+            "imageOptions": null,
+            "audioURL": "mock"
           }
         ]
       }

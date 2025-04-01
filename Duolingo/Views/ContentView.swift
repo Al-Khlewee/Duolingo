@@ -29,13 +29,21 @@ struct ContentView: View {
                 LessonsScreen() //  main lessons screen
                     .environmentObject(appState) // Pass down the app state
                     .tag(Tab.lessons)
-                Text("Achievements") // Placeholder
+                Text("Achievements")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
                     .tag(Tab.achievements)
-                Text("Practice") // Placeholder
+                Text("Practice")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
                     .tag(Tab.practice)
-                Text("Profile") // Placeholder
+                Text("Profile")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
                     .tag(Tab.profile)
-                Text("Social") // Placeholder
+                Text("Social")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
                     .tag(Tab.social)
             }
             if !appState.isInExerciseView {  // Only show navigation bar when not in exercise view
@@ -59,18 +67,30 @@ struct ContentView: View {
         .overlay(
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(theme.textSecondary.opacity(0.3)), // Separator line
+                .foregroundColor(theme.textSecondary.opacity(0.2)), // Lighter separator line
             alignment: .top
         )
+        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: -2) // Add subtle shadow
     }
 
     //  navigation button
     private func navButton(iconName: String, tab: Tab) -> some View {
         Button(action: { selectedTab = tab }) {
-            VStack {
+            VStack(spacing: 3) {
                 Image(systemName: iconName)
                     .font(.system(size: 22))
-                    .foregroundColor(selectedTab == tab ? theme.accent : theme.textSecondary) // Highlight selected
+                    .foregroundColor(selectedTab == tab ? theme.accent : theme.textSecondary)
+                
+                // Add small indicator dot for selected tab
+                if selectedTab == tab {
+                    Circle()
+                        .fill(theme.accent)
+                        .frame(width: 4, height: 4)
+                        .padding(.top, 2)
+                } else {
+                    Spacer()
+                        .frame(height: 6)
+                }
             }
             .frame(maxWidth: .infinity) // Distribute buttons evenly
         }

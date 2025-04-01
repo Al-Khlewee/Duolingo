@@ -74,6 +74,9 @@ struct CourseSectionView: View {
             case .imageSelection:
                 DuolingoImageSelectionView(lesson: lesson)
                     .environmentObject(appState)
+            case .listening:
+                DuolingoListeningView(lesson: lesson)
+                    .environmentObject(appState)
             }
         } else {
             Text("No exercises available") // Placeholder for lessons without exercises.

@@ -5,28 +5,51 @@
 //  Created by Hatem Al-Khlewee on 25/03/2025.
 //
 
-//  DuolingoCloneApp.swift
 import SwiftUI
 
 @main
 struct DuolingoApp: App {
     @StateObject var appState = ChineseAppState() // Create the app state here
     @State private var preferredColorScheme: ColorScheme? = nil
-
+    @AppStorage("userColorScheme") private var userColorScheme: String = "auto"
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(appState)
-                .environment(\.theme, preferredColorScheme == .dark ? .dark : .light) // Apply initial theme
-                .preferredColorScheme(preferredColorScheme)
+                .environment(\.theme, getTheme(for: userColorScheme))
+                .preferredColorScheme(getPreferredColorScheme())
                 .onAppear {
-                    // Optionally load a user's preferred color scheme from UserDefaults
-                    // let userColorScheme = UserDefaults.standard.string(forKey: "preferredColorScheme")
-                    // preferredColorScheme = userColorScheme == "dark" ? .dark : .light
+                    // Ensure the appState saves progress when changes occur
+                    appState.loadProgress()
                 }
-                //.onChange(of: appState.userProgress) { _ in  //Example of saveProgress best practice
-                    //appState.saveProgress()
-                //}
+                .onChange(of: appState.userProgress) { _ in
+                    appState.saveProgress()
+                }
+        }
+    }
+    
+    // Helper to determine theme based on user preference
+    private func getTheme(for scheme: String) -> AppTheme {
+        switch scheme {
+        case "dark":
+            return .dark
+        case "light": 
+            return .light
+        default: // Auto mode
+            return preferredColorScheme == .dark ? .dark : .light
+        }
+    }
+    
+    // Helper to determine color scheme based on user preference
+    private func getPreferredColorScheme() -> ColorScheme? {
+        switch userColorScheme {
+        case "dark":
+            return .dark
+        case "light":
+            return .light
+        default: // Auto mode
+            return nil
         }
     }
 }
