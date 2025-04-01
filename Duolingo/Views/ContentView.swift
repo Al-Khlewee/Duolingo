@@ -18,16 +18,15 @@ enum Tab { //  tab items
 }
 
 struct ContentView: View {
-    @StateObject var appState = ChineseAppState() // App-level state
+    @StateObject var appState = ChineseAppState() // App-level state defined once here
     @Environment(\.theme) var theme // Theme
     @Environment(\.colorScheme) var colorScheme // System color scheme
-    @State private var selectedTab: Tab = .lessons //  track selected tab
+    @State private var selectedTab: Tab = .lessons // track selected tab
 
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) { // TabView for main navigation
-                LessonsScreen() //  main lessons screen
-                    .environmentObject(appState) // Pass down the app state
+                LessonsScreen() // main lessons screen
                     .tag(Tab.lessons)
                 Text("Achievements")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -47,13 +46,14 @@ struct ContentView: View {
                     .tag(Tab.social)
             }
             if !appState.isInExerciseView {  // Only show navigation bar when not in exercise view
-                bottomNavigationBar //  custom bottom navigation bar
+                bottomNavigationBar // custom bottom navigation bar
             }
         }
+        .environmentObject(appState) // Pass down the app state once from the root view
         .preferredColorScheme(colorScheme) // Respect system color scheme
     }
 
-    //  custom bottom navigation bar
+    // custom bottom navigation bar
     private var bottomNavigationBar: some View {
         HStack(spacing: 0) {
             navButton(iconName: "house.fill", tab: .lessons) // Home icon
@@ -63,7 +63,7 @@ struct ContentView: View {
             navButton(iconName: "person.2.fill", tab: .social) // Social icon
         }
         .padding(.vertical, 10)
-        .background(theme.background) //  background color
+        .background(theme.background) // background color
         .overlay(
             Rectangle()
                 .frame(height: 1)
@@ -73,7 +73,7 @@ struct ContentView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: -2) // Add subtle shadow
     }
 
-    //  navigation button
+    // navigation button
     private func navButton(iconName: String, tab: Tab) -> some View {
         Button(action: { selectedTab = tab }) {
             VStack(spacing: 3) {
@@ -101,7 +101,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(ChineseAppState())
             .environment(\.theme, AppTheme.systemTheme())
     }
 }
