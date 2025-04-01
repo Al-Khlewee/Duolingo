@@ -21,8 +21,6 @@ struct AppTheme {
     let highlight: Color       // For selected word pills
     let iconColor: Color       // For icons in LessonCircle
     let iconDisabledColor: Color // For disabled icons
-    let lessonConnector: Color // For lesson path connectors
-    
     // Duolingo-branded color constants
     private static let duoGreen = Color(red: 88/255, green: 204/255, blue: 2/255)        // #58CC02
     private static let duoBlue = Color(red: 28/255, green: 176/255, blue: 246/255)       // #1CB0F6
@@ -51,8 +49,7 @@ struct AppTheme {
         failure: duoRed,
         highlight: duoBlue,
         iconColor: .white,
-        iconDisabledColor: duoGray,
-        lessonConnector: duoGreen.opacity(0.7)
+        iconDisabledColor: duoGray
     )
     
     // Light theme (based on actual Duolingo light mode)
@@ -70,8 +67,7 @@ struct AppTheme {
         failure: duoRed,
         highlight: duoYellow,
         iconColor: duoDarkest,
-        iconDisabledColor: duoGray,
-        lessonConnector: duoGreen
+        iconDisabledColor: duoGray
     )
 }
 
