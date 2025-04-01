@@ -52,5 +52,5 @@ struct ExerciseHeaderView: View {
     }
     .padding()
     .background(Color(.systemBackground))
-    .environment(\.theme, .light)
+    .environment(\.theme, AppTheme.systemTheme())
 }

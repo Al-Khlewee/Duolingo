@@ -1,11 +1,3 @@
-//
-//  Tab.swift
-//  Duolingo
-//
-//  Created by Hatem Al-Khlewee on 25/03/2025.
-//
-
-
 // Views/ContentView.swift
 import SwiftUI
 
@@ -37,9 +29,8 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(theme.background)
                     .tag(Tab.practice)
-                Text("Profile")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(theme.background)
+                ProfileView()
+                    .environmentObject(appState)
                     .tag(Tab.profile)
                 Text("Social")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -96,12 +87,8 @@ struct ContentView: View {
         }
     }
 }
-
-// Fix Preview by using the PreviewProvider protocol
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(ChineseAppState())
-            .environment(\.theme, AppTheme.systemTheme())
-    }
+#Preview {
+    ContentView()
+        .environmentObject(ChineseAppState())
+        .environment(\.theme, .light)
 }

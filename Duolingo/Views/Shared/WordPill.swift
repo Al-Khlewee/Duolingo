@@ -112,5 +112,5 @@ struct WordPill: View {
         }
     }
     .padding()
-    .environment(\.theme, .light)
+    .environment(\.theme, .dark)
 }

@@ -71,5 +71,5 @@ struct LessonCircle: View {
 #Preview {
     ContentView()
         .environmentObject(ChineseAppState())
-        .environment(\.theme, .light)
+        //.environment(\.theme, AppTheme.systemTheme())
 }

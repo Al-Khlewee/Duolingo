@@ -13,6 +13,7 @@ struct CourseSectionView: View {
     let course: Course
     @EnvironmentObject var appState: ChineseAppState
     @Environment(\.theme) var theme // Using environment for theme
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack(alignment: .center, spacing: 12) {
@@ -49,14 +50,21 @@ struct CourseSectionView: View {
                     .disabled(lesson.isLocked) // Disable locked lessons
 
                     if index < course.lessons.count - 1 {
-                        LessonConnector(isCompleted: appState.userProgress.completedLessons.contains(course.lessons[index + 1].id)) // Show connector
+                        // Fixed UUID comparison by ensuring we're passing a UUID to contains()
+                        let nextLessonID = course.lessons[index + 1].id
+                        LessonConnector(isCompleted: appState.userProgress.completedLessons.contains(nextLessonID))
                     }
                 }
             }
             .frame(maxWidth: .infinity) // Ensure it takes up the full width
         }
         .padding()
-        .cornerRadius(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(theme.cardBackground)
+                .shadow(color: colorScheme == .dark ? Color.black.opacity(0.3) : Color.gray.opacity(0.2), 
+                       radius: 8, x: 0, y: 2)
+        )
         .padding(.horizontal)
         .frame(maxWidth: .infinity)
     }
@@ -83,3 +91,13 @@ struct CourseSectionView: View {
         }
     }
 }
+
+// Replace #Preview with PreviewProvider to avoid ambiguity
+struct CourseSectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        CourseSectionView(course: Course(id: UUID(), title: "Basics", subtitle: "Learn essentials", lessons: []))
+            .environment(\.theme, AppTheme.systemTheme())
+            .environmentObject(ChineseAppState())
+    }
+}
+

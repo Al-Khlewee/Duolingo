@@ -95,14 +95,17 @@ struct DuolingoButton: View {
     }
 }
 
-#Preview {
-    VStack(spacing: 20) {
-        DuolingoButton(text: "CHECK", action: {})
-        DuolingoButton(text: "CONTINUE", buttonType: .success, action: {})
-        DuolingoButton(text: "TRY AGAIN", buttonType: .failure, action: {})
-        DuolingoButton(text: "DISABLED", isEnabled: false, action: {})
+// Replace #Preview with PreviewProvider
+struct DuolingoButton_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(spacing: 20) {
+            DuolingoButton(text: "CHECK", action: {})
+            DuolingoButton(text: "CONTINUE", buttonType: .success, action: {})
+            DuolingoButton(text: "TRY AGAIN", buttonType: .failure, action: {})
+            DuolingoButton(text: "DISABLED", isEnabled: false, action: {})
+        }
+        .padding()
+        .environment(\.theme, AppTheme.systemTheme())
+        .previewDisplayName("System Theme")
     }
-    .padding()
-    .environment(\.theme, .light)
-    .previewDisplayName("Light Theme")
 }

@@ -34,5 +34,5 @@ struct DuolingoProgressBar: View {
     }
     .frame(height: 20)
     .padding()
-    .environment(\.theme, .light)
+    .environment(\.theme, AppTheme.systemTheme())
 }

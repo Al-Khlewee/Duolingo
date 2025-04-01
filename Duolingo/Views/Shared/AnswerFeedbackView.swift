@@ -72,6 +72,6 @@ struct CheckAnswerButton: View {
         CheckAnswerButton(hasAnswer: false, onCheck: {})
     }
     .padding()
-    .environment(\.theme, .light)
+    .environment(\.theme, AppTheme.systemTheme())
     .previewLayout(.sizeThatFits)
 }

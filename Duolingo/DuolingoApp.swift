@@ -12,6 +12,7 @@ struct DuolingoApp: App {
     @StateObject var appState = ChineseAppState() // Create the app state here
     @State private var preferredColorScheme: ColorScheme? = nil
     @AppStorage("userColorScheme") private var userColorScheme: String = "auto"
+    @Environment(\.colorScheme) private var systemColorScheme
     
     var body: some Scene {
         WindowGroup {
@@ -22,9 +23,25 @@ struct DuolingoApp: App {
                 .onAppear {
                     // Ensure the appState saves progress when changes occur
                     appState.loadProgress()
+                    // Initialize theme based on current system appearance
+                    preferredColorScheme = getPreferredColorScheme()
                 }
                 .onChange(of: appState.userProgress) { _ in
                     appState.saveProgress()
+                }
+                .onChange(of: userColorScheme) { newValue in
+                    // Update the preferred color scheme when the user changes the theme
+                    withAnimation {
+                        preferredColorScheme = getPreferredColorScheme()
+                    }
+                }
+                .onChange(of: systemColorScheme) { newValue in
+                    // If in auto mode, update when system theme changes
+                    if userColorScheme == "auto" {
+                        withAnimation {
+                            preferredColorScheme = newValue
+                        }
+                    }
                 }
         }
     }
@@ -37,7 +54,8 @@ struct DuolingoApp: App {
         case "light": 
             return .light
         default: // Auto mode
-            return preferredColorScheme == .dark ? .dark : .light
+            let effectiveColorScheme = systemColorScheme // Use current system scheme for auto
+            return effectiveColorScheme == .dark ? .dark : .light
         }
     }
     

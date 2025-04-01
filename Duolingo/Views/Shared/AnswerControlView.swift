@@ -73,5 +73,5 @@ struct AnswerControlView: View {
         )
     }
     .padding()
-    .environment(\.theme, .light)
+    .environment(\.theme, AppTheme.systemTheme())
 }

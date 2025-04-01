@@ -42,5 +42,5 @@ struct SpeakerButton: View {
         SpeakerButton(isPlaying: true, action: {})
     }
     .padding()
-    .environment(\.theme, .light)
+    .environment(\.theme, AppTheme.systemTheme())
 }

@@ -138,19 +138,12 @@ struct LessonsScreen: View {
 // Views/Lessons/LessonsScreen.swift
 struct LessonsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        Group{
-            LessonsScreen()
-                .environmentObject(previewAppState) // Use a helper property
-                .environment(\.theme, .light)
-                .previewDisplayName("Loaded Data - Light")
-            
-            LessonsScreen()
-                .environmentObject(previewAppState) // Use a helper property
-                .environment(\.theme, .dark)
-                .previewDisplayName("Loaded Data - Dark")
-        }
+        LessonsScreen()
+            .environmentObject(previewAppState) // Use a helper property
+            .environment(\.theme, AppTheme.systemTheme())  // Fully qualified to avoid ambiguity
+            .previewDisplayName("System Theme")
     }
-
+    
     static var previewAppState: ChineseAppState = {
         let appState = ChineseAppState() // Data is loaded in init()
         //You could potentially do additional setup specific for the preview.

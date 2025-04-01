@@ -1,31 +1,23 @@
-//
-//  AppTheme.swift
-//  Duolingo
-//
-//  Created by Hatem Al-Khlewee on 25/03/2025.
-//
-
-
 // Themes/AppTheme.swift
 import SwiftUI
 
 struct AppTheme {
     let textPrimary: Color
     let textSecondary: Color
-    let accent: Color          // General accent color.
-    let background: Color      // Main background.
-    let cardBackground: Color  // Background for cards/sections.
-    let button: Color          // General button color.
+    let accent: Color          // General accent color (Duolingo green)
+    let background: Color      // Main background
+    let cardBackground: Color  // Background for cards/sections
+    let button: Color          // General button color
     let buttonDisabled: Color
-    let progress: Color        // For progress bars.
+    let progress: Color        // For progress bars
     let progressBackground: Color
-    let success: Color         // For correct answers, checkmarks.
-    let failure: Color         // For incorrect answers, xmarks.
-    let highlight: Color      // e.g., for selected word pills
-    let iconColor: Color       //  icons in LessonCircle
-    let iconDisabledColor: Color // icons in LessonCircle
-    let lessonConnector: Color
-
+    let success: Color         // For correct answers, checkmarks
+    let failure: Color         // For incorrect answers, xmarks
+    let highlight: Color       // For selected word pills
+    let iconColor: Color       // For icons in LessonCircle
+    let iconDisabledColor: Color // For disabled icons
+    let lessonConnector: Color // For lesson path connectors
+    
     // Duolingo-branded color constants
     private static let duoGreen = Color(red: 88/255, green: 204/255, blue: 2/255)        // #58CC02
     private static let duoBlue = Color(red: 28/255, green: 176/255, blue: 246/255)       // #1CB0F6
@@ -37,24 +29,25 @@ struct AppTheme {
     private static let duoLightGray = Color(red: 229/255, green: 229/255, blue: 229/255) // #E5E5E5
     private static let duoDarkGray = Color(red: 77/255, green: 77/255, blue: 77/255)     // #4D4D4D
     private static let duoDarkest = Color(red: 41/255, green: 41/255, blue: 41/255)      // #292929
+    private static let duoCharcoal = Color(red: 28/255, green: 28/255, blue: 28/255)     // #1C1C1C
 
     // Dark theme (based on actual Duolingo dark mode)
     static let dark = AppTheme(
         textPrimary: .white,
         textSecondary: Color(white: 0.7),
         accent: duoGreen,
-        background: duoDarkest,
+        background: duoCharcoal,
         cardBackground: duoDarkGray,
-        button: duoGreen,
+        button: Color(white: 0.2),
         buttonDisabled: duoGray,
         progress: duoGreen,
-        progressBackground: duoLightGray.opacity(0.2),
+        progressBackground: duoDarkGray,
         success: duoGreen,
         failure: duoRed,
         highlight: duoBlue,
         iconColor: .white,
         iconDisabledColor: duoGray,
-        lessonConnector: duoGreen
+        lessonConnector: duoGreen.opacity(0.7)
     )
 
     // Light theme (based on actual Duolingo light mode)
@@ -77,16 +70,7 @@ struct AppTheme {
     )
 }
 
-// Helper extension for automatic theme switching in previews
-extension AppTheme {
-    static func systemTheme() -> AppTheme {
-        // Get the current system appearance
-        let currentAppearance = UITraitCollection.current.userInterfaceStyle
-        return currentAppearance == .dark ? .dark : .light
-    }
-}
-
-// Make the theme accessible via the environment.  This is crucial for consistent styling.
+// Make the theme accessible via the environment
 extension EnvironmentValues {
     var theme: AppTheme {
         get { self[ThemeKey.self] }
