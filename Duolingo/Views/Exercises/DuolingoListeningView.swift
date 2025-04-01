@@ -40,36 +40,40 @@ struct DuolingoListeningView: View {
                             .padding(.top, 20)
                         
                         // Audio controls section
-                        HStack(spacing: 15) {
-                            // Speaker button for normal speed
-                            SpeakerButton(
-                                isPlaying: viewModel.isPlaying && !viewModel.isPlayingSlow,
-                                action: { viewModel.playAudio(slow: false) }
-                            )
+                        ZStack {
+                            // Background rectangle for the buttons
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(theme.background)
+                                .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+                                .frame(width: 200, height: 75)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(theme.textSecondary.opacity(0.3), lineWidth: 1)
+                                )
                             
-                            // Slow playback button with turtle icon
-                            SlowPlaybackButton(
-                                isPlaying: viewModel.isPlaying && viewModel.isPlayingSlow,
-                                action: { viewModel.playAudio(slow: true) }
-                            )
-                            
-                            // Visual separator with dots
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Tap to listen")
-                                    .font(.subheadline)
-                                    .foregroundColor(theme.textSecondary)
+                            HStack(spacing: 0) {
+                                // Speaker button for normal speed
+                                SpeakerButton(
+                                    isPlaying: viewModel.isPlaying && !viewModel.isPlayingSlow,
+                                    action: { viewModel.playAudio(slow: false) }
+                                )
+                                .frame(width: 98)
                                 
-                                //  visual line using dots
-                                HStack(spacing: 2) {
-                                    ForEach(0..<40, id: \.self) { _ in
-                                        Circle()
-                                            .frame(width: 3, height: 3)
-                                            .foregroundColor(theme.textSecondary.opacity(0.5))
-                                    }
-                                }
-                                .padding(.trailing, 20)
+                                // Vertical divider
+                                Rectangle()
+                                    .fill(theme.textSecondary.opacity(0.3))
+                                    .frame(width: 1, height: 40)
+                                
+                                // Slow playback button with turtle icon
+                                SlowPlaybackButton(
+                                    isPlaying: viewModel.isPlaying && viewModel.isPlayingSlow,
+                                    action: { viewModel.playAudio(slow: true) }
+                                )
+                                .frame(width: 98)
                             }
+                            .frame(width: 200, height: 75)
                         }
+                        .padding(.vertical, 5)
                         
                         VStack(spacing: 30) {
                             ZStack(alignment: .topLeading) {
@@ -88,39 +92,9 @@ struct DuolingoListeningView: View {
                                     .padding(.horizontal, 4)
                             }
                             
-                            // Only show available words if they exist
+                            // Use available words for pill selection if they exist
                             if let availableWords = exercise.availableWords, !availableWords.isEmpty {
                                 availableWordsView(availableWords: availableWords)
-                            } else if !viewModel.isAnswered {
-                                // If no available words are provided, show the text field as a fallback
-                                VStack(alignment: .leading, spacing: 12) {
-                                    Text("Your answer:")
-                                        .font(.headline)
-                                        .foregroundColor(theme.textSecondary)
-                                    
-                                    // Text field for user input
-                                    ZStack(alignment: .leading) {
-                                        if viewModel.userInput.isEmpty && !isTextFieldFocused {
-                                            Text("Type your answer here...")
-                                                .foregroundColor(theme.textSecondary.opacity(0.5))
-                                                .padding(12)
-                                        }
-                                        
-                                        TextField("", text: $viewModel.userInput)
-                                            .focused($isTextFieldFocused)
-                                            .padding(12)
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 8)
-                                                    .fill(theme.background)
-                                                    .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 2)
-                                            )
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 8)
-                                                    .stroke(theme.textSecondary.opacity(0.3), lineWidth: 1)
-                                            )
-                                            .disabled(viewModel.isAnswered)
-                                    }
-                                }
                             }
                         }
                         .padding(.top, 1)
@@ -163,10 +137,9 @@ struct DuolingoListeningView: View {
                         AnswerControlView(
                             isAnswered: viewModel.isAnswered,
                             isCorrect: viewModel.isCorrect,
-                            hasSelectedAnswer: !viewModel.selectedWords.isEmpty || !viewModel.userInput.isEmpty,
+                            hasSelectedAnswer: !viewModel.selectedWords.isEmpty,
                             onCheck: {
                                 viewModel.checkAnswer()
-                                isTextFieldFocused = false
                             },
                             onContinue: {
                                 if viewModel.isCorrect {
@@ -176,9 +149,6 @@ struct DuolingoListeningView: View {
                                     }
                                 }
                                 viewModel.resetExercise()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    isTextFieldFocused = true
-                                }
                             }
                         )
                     }
@@ -199,10 +169,6 @@ struct DuolingoListeningView: View {
         }
         .onAppear {
             appState.isInExerciseView = true
-            // Auto-focus text field when view appears
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                isTextFieldFocused = true
-            }
         }
         .onDisappear {
             appState.isInExerciseView = false
