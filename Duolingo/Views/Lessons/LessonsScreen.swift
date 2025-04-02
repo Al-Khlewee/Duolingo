@@ -126,11 +126,7 @@ struct LessonsScreen: View {
                 .padding(.horizontal, 8)
         }
         .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(theme.cardBackground)
-                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
-        )
+        // Removed the background and shadow completely
         .padding(.horizontal, 16)
         .padding(.top, 8)
     }
