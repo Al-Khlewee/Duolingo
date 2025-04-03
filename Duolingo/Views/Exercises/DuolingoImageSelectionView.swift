@@ -200,7 +200,8 @@ enum PreviewData {
                         englishText: "Rabbit"
                     )
                 ],
-                audioURL: nil
+                audioURL: nil,
+                strokeCharacters: nil
             )
         ]
     )

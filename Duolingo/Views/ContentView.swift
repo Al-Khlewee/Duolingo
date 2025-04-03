@@ -23,132 +23,196 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme // System color scheme
     @State private var selectedTab: Tab = .lessons // track selected tab
     @State private var tabAnimation: Bool = false // For tab switching animation
+    @State private var showingStrokeDrawingExercise = false // For showing stroke drawing exercise
 
     var body: some View {
-        ZStack {
-            // Main TabView with content
-            TabView(selection: $selectedTab) {
-                LessonsScreen()
-                    .tag(Tab.lessons)
-                    .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
-                
-                // Practice tab
-                VStack {
-                    Text("Practice")
-                        .font(.system(size: 28, weight: .bold))
-                        .padding(.top, 40)
+        NavigationView {
+            ZStack {
+                // Main TabView with content
+                TabView(selection: $selectedTab) {
+                    LessonsScreen()
+                        .tag(Tab.lessons)
+                        .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
                     
-                    Spacer()
-                    
-                    Image(systemName: "dumbbell.fill")
-                        .font(.system(size: 70))
-                        .foregroundColor(theme.accent.opacity(0.8))
-                    
-                    Text("Coming soon!")
-                        .font(.system(size: 18, weight: .medium))
-                        .padding()
-                    
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(theme.background)
-                .tag(Tab.practice)
-                .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
-                
-                // Leaderboard tab
-                VStack {
-                    Text("Leaderboard")
-                        .font(.system(size: 28, weight: .bold))
-                        .padding(.top, 40)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "trophy.fill")
-                        .font(.system(size: 70))
-                        .foregroundColor(theme.highlight)
-                    
-                    Text("Compete with friends!")
-                        .font(.system(size: 18, weight: .medium))
-                        .padding()
-                    
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(theme.background)
-                .tag(Tab.leaderboard)
-                .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
-                
-                // Profile tab
-                VStack {
-                    Text("Profile")
-                        .font(.system(size: 28, weight: .bold))
-                        .padding(.top, 40)
-                    
-                    ZStack {
-                        Circle()
-                            .fill(theme.accent.opacity(0.1))
-                            .frame(width: 120, height: 120)
+                    // Practice tab
+                    VStack {
+                        Text("Practice")
+                            .font(.system(size: 28, weight: .bold))
+                            .padding(.top, 40)
                         
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 50))
-                            .foregroundColor(theme.accent)
+                        Spacer()
+                        
+                        VStack(spacing: 24) {
+                            // Character Drawing Practice Button
+                            NavigationLink(
+                                destination: DuolingoStrokeDrawingView(lesson: createStrokeDrawingLesson()),
+                                isActive: $showingStrokeDrawingExercise
+                            ) {
+                                Button {
+                                    showingStrokeDrawingExercise = true
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "pencil.and.outline")
+                                            .font(.system(size: 24))
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("Character Writing")
+                                                .font(.headline)
+                                            
+                                            Text("Practice writing Chinese characters")
+                                                .font(.subheadline)
+                                                .foregroundColor(theme.textSecondary)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(theme.accent)
+                                    }
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(theme.cardBackground)
+                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                                    )
+                                    .padding(.horizontal)
+                                }
+                            }
+                            
+                            // Other practice options (placeholder)
+                            Button {} label: {
+                                HStack {
+                                    Image(systemName: "speaker.wave.2.fill")
+                                        .font(.system(size: 24))
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text("Listening Practice")
+                                            .font(.headline)
+                                        
+                                        Text("Coming soon")
+                                            .font(.subheadline)
+                                            .foregroundColor(theme.textSecondary)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(theme.textSecondary)
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(theme.cardBackground.opacity(0.7))
+                                        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                                )
+                                .padding(.horizontal)
+                            }
+                            .disabled(true)
+                        }
+                        
+                        Spacer()
                     }
-                    .padding(.top, 20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
+                    .tag(Tab.practice)
+                    .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
                     
-                    Text("Your Progress")
-                        .font(.system(size: 22, weight: .bold))
+                    // Leaderboard tab
+                    VStack {
+                        Text("Leaderboard")
+                            .font(.system(size: 28, weight: .bold))
+                            .padding(.top, 40)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "trophy.fill")
+                            .font(.system(size: 70))
+                            .foregroundColor(theme.highlight)
+                        
+                        Text("Compete with friends!")
+                            .font(.system(size: 18, weight: .medium))
+                            .padding()
+                        
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
+                    .tag(Tab.leaderboard)
+                    .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
+                    
+                    // Profile tab
+                    VStack {
+                        Text("Profile")
+                            .font(.system(size: 28, weight: .bold))
+                            .padding(.top, 40)
+                        
+                        ZStack {
+                            Circle()
+                                .fill(theme.accent.opacity(0.1))
+                                .frame(width: 120, height: 120)
+                            
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 50))
+                                .foregroundColor(theme.accent)
+                        }
                         .padding(.top, 20)
-                    
-                    HStack(spacing: 20) {
-                        statView(value: "7", label: "Day streak")
-                        statView(value: "1024", label: "XP")
-                        statView(value: "12", label: "Crowns")
+                        
+                        Text("Your Progress")
+                            .font(.system(size: 22, weight: .bold))
+                            .padding(.top, 20)
+                        
+                        HStack(spacing: 20) {
+                            statView(value: "7", label: "Day streak")
+                            statView(value: "1024", label: "XP")
+                            statView(value: "12", label: "Crowns")
+                        }
+                        .padding(.top, 20)
+                        
+                        Spacer()
                     }
-                    .padding(.top, 20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
+                    .tag(Tab.profile)
+                    .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
                     
-                    Spacer()
+                    // Shop tab
+                    VStack {
+                        Text("Shop")
+                            .font(.system(size: 28, weight: .bold))
+                            .padding(.top, 40)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "cart.fill")
+                            .font(.system(size: 70))
+                            .foregroundColor(theme.accent.opacity(0.8))
+                        
+                        Text("Get more gems and power-ups!")
+                            .font(.system(size: 18, weight: .medium))
+                            .padding()
+                        
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(theme.background)
+                    .tag(Tab.shop)
+                    .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(theme.background)
-                .tag(Tab.profile)
-                .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
                 
-                // Shop tab
+                // Floating Navigation Bar
                 VStack {
-                    Text("Shop")
-                        .font(.system(size: 28, weight: .bold))
-                        .padding(.top, 40)
-                    
                     Spacer()
-                    
-                    Image(systemName: "cart.fill")
-                        .font(.system(size: 70))
-                        .foregroundColor(theme.accent.opacity(0.8))
-                    
-                    Text("Get more gems and power-ups!")
-                        .font(.system(size: 18, weight: .medium))
-                        .padding()
-                    
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(theme.background)
-                .tag(Tab.shop)
-                .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) } // Add space for floating bar
-            }
-            
-            // Floating Navigation Bar
-            VStack {
-                Spacer()
-                if !appState.isInExerciseView {  // Only show when not in exercise
-                    floatingNavigationBar
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 10)
+                    if !appState.isInExerciseView {  // Only show when not in exercise
+                        floatingNavigationBar
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 10)
+                    }
                 }
             }
+            .environmentObject(appState)
+            .preferredColorScheme(colorScheme)
+            .navigationBarHidden(true)
         }
-        .environmentObject(appState)
-        .preferredColorScheme(colorScheme)
     }
     
     // Stat item view for profile tab

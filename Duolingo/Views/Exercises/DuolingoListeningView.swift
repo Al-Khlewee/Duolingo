@@ -298,7 +298,8 @@ struct DuolingoListeningView_Previews: PreviewProvider {
                     rightItems: nil,
                     rightItemsPinyin: nil,
                     imageOptions: nil,
-                    audioURL: "mock"
+                    audioURL: "mock",
+                    strokeCharacters: nil
                 )
             ]
         )

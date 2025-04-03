@@ -230,6 +230,8 @@ struct CourseSectionView: View {
                 DuolingoImageSelectionView(lesson: lesson)
             case .listening:
                 DuolingoListeningView(lesson: lesson)
+            case .strokeDrawing:
+                DuolingoStrokeDrawingView(lesson: lesson)
             }
         } else {
             Text("No exercises available")
@@ -281,7 +283,8 @@ struct CourseSectionView_Previews: PreviewProvider {
                     rightItems: nil,
                     rightItemsPinyin: nil,
                     imageOptions: nil,
-                    audioURL: nil
+                    audioURL: nil,
+                    strokeCharacters: nil
                 )
             ]
         )

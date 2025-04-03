@@ -12,6 +12,7 @@ struct AppTheme {
     let accent: Color          // General accent color (Duolingo green)
     let background: Color      // Main background
     let cardBackground: Color  // Background for cards/sections
+    let inputBackground: Color // Background for input fields and drawing canvas
     let button: Color          // General button color
     let buttonDisabled: Color
     let progress: Color        // For progress bars
@@ -41,6 +42,7 @@ struct AppTheme {
         accent: duoGreen,
         background: duoCharcoal,
         cardBackground: duoDarkGray,
+        inputBackground: Color(white: 0.2),
         button: duoGreen,
         buttonDisabled: duoGray,
         progress: duoGreen,
@@ -59,6 +61,7 @@ struct AppTheme {
         accent: duoGreen,
         background: .white,
         cardBackground: .white,
+        inputBackground: Color(white: 0.95),
         button: duoGreen,
         buttonDisabled: duoLightGray.opacity(0.5),
         progress: duoGreen,
